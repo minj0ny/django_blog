@@ -26,4 +26,5 @@ urlpatterns = [
     path('blogform/', theme.views.blogform, name='blogform'),
     path('blog/<int:pk>/edit/', theme.views.edit, name='edit'),
     path('blog/<int:pk>/remove/', theme.views.remove, name='remove'),
+    path('blog/<int:pk>/detail/', theme.views.detail, name='detail'),
 ]

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Blog
+from .models import Blog, Comment
 
 
 class BlogForm(forms.ModelForm):
@@ -15,3 +15,9 @@ class BlogForm(forms.ModelForm):
         self.fields['writer'].widget.attrs['placeholder'] = "Your email address"
         self.fields['title'].widget.attrs['placeholder'] = "Your subject of this message"
         self.fields['body'].widget.attrs['placeholder'] = "Say something about your today"
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["comment_text"]
