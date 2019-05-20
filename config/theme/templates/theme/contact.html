@@ -1,39 +1,41 @@
 {% extends 'index.html' %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
-{% block content %}	
+{% block content %}
 
-		<section id="home" class="video-hero" style="height: 500px; background-image: url({% static 'images/cover_img_1.jpg' %});  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
-		<div class="overlay"></div>
-			<div class="display-t display-t2 text-center">
-				<div class="display-tc display-tc2">
-					<div class="container">
-						<div class="col-md-12 col-md-offset-0">
-							<div class="animate-box">
-								<h2>Writing</h2>
-								<p class="breadcrumbs"><span><a href="index.html">Home</a></span> <span>writing</span></p>
-							</div>
-						</div>
+<section id="home" class="video-hero"
+	style="height: 500px; background-image: url({% static 'images/cover_img_1.jpg' %});  background-size:cover; background-position: center center;background-attachment:fixed;"
+	data-section="home">
+	<div class="overlay"></div>
+	<div class="display-t display-t2 text-center">
+		<div class="display-tc display-tc2">
+			<div class="container">
+				<div class="col-md-12 col-md-offset-0">
+					<div class="animate-box">
+						<h2>Writing</h2>
+						<p class="breadcrumbs"><span><a href="index.html">Home</a></span> <span>writing</span></p>
 					</div>
 				</div>
 			</div>
-		</section>
-			<div class="container">
-					<div class="animate-box">
-					<br>
-						<h2>Writing Form</h2>
-						<form method='POST'>
-						{% csrf_token %}
-        					<table>
-        					 {{ form|crispy }}
-        					</table>
-							<div class="form-group">
-								<input type="submit" value="complete" class="btn btn-primary">
-							</div>
-						</form>		
-					</div>
-				</div>
+		</div>
+	</div>
+</section>
+<div class="container">
+	<div class="animate-box">
+		<br>
+		<h2>Writing Form</h2>
+		<form method='POST'>
+			{% csrf_token %}
+			<table>
+				{{ form|crispy }}
+			</table>
+			<div class="form-group">
+				<input type="submit" value="complete" class="btn btn-primary">
+			</div>
+		</form>
+	</div>
+</div>
 
-		<div id="map" class="colorlib-map"></div>
+<div id="map" class="colorlib-map"></div>
 
- {% endblock %}
+{% endblock %}
