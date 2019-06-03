@@ -12,8 +12,8 @@
 			<div class="container">
 				<div class="col-md-12 col-md-offset-0">
 					<div class="animate-box">
-						<h2>Writing</h2>
-						<p class="breadcrumbs"><span><a href="index.html">Home</a></span> <span>writing</span></p>
+						<h2>Writing Hashtag</h2>
+						<p class="breadcrumbs"><span><a href="index.html">Home</a></span> <span>writing hashtag</span></p>
 					</div>
 				</div>
 			</div>
@@ -23,8 +23,9 @@
 <div class="container">
 	<div class="animate-box">
 		<br>
-		<h2>Writing Form</h2>
-		<form method='POST' enctype="multipart/form-data">
+		<h2>Writing Hashtg Form</h2>
+        {{ error_message }}
+		<form method='POST'>
 			{% csrf_token %}
 			<table>
 				{{ form|crispy }}

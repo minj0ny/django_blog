@@ -30,6 +30,9 @@
 					<h2><a href="#">{{ blog.title }}</a></h2>
 					<p class="admin"><span>{{ blog.pub_date }}</span></p>
 					<p>{{ blog.body }}</p>
+					{% for hashtag in blog.hashtags.all %}
+					<span>{{ hashtag.name }}</span>
+					{% endfor %}
 					<p class="author-wrap"><a href="#" class="author-img"
 							style="background-image: url({% static 'images/user.png' %});"></a> <a href="#"
 							class="author">by {{ blog.writer }}</a></p>

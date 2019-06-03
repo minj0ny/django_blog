@@ -1,8 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic. base import TemplateView
 from django.utils import timezone
-from .forms import BlogForm, CommentForm
-from .models import Blog, Comment
+from .forms import BlogForm, CommentForm, HashtagForm
+from .models import Blog, Comment, Hashtag
 # Create your views here.
 
 
@@ -12,7 +12,8 @@ class MainpageView(TemplateView):
 
 def blog(request):
     blogs = Blog.objects
-    return render(request, 'theme/blog.html', {'blogs': blogs})
+    hashtags = Hashtag.objects
+    return render(request, 'theme/blog.html', {'blogs': blogs, 'hashtags': hashtags})
 
 
 def contact(request):
@@ -25,11 +26,12 @@ def home(request):
 
 def blogform(request, blog=None):
     if request.method == "POST":
-        form = BlogForm(request.POST, instance=blog)
+        form = BlogForm(request.POST, request.FILES,instance=blog)
         if form.is_valid():
             blog = form.save(commit=False)
             blog.pub_date = timezone.now()
             blog.save()
+            form.save_m2m()
             return redirect('blog')
     else:
         form = BlogForm(instance=blog)
@@ -71,3 +73,26 @@ def comment_remove(request, pk, blog_pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
     return redirect('detail', blog_pk)
+
+
+def hashtagform(request, hashtag=None):
+    if request.method == "POST":
+        form = HashtagForm(request.POST, instance=hashtag)
+        if form.is_valid():
+            hashtag = form.save(commit=False)
+            if Hashtag.objects.filter(name=form.cleaned_data['name']):
+                form = HashtagForm()
+                error_message = "이미 존재하는 해시태그 입니다."
+                return render(request, 'theme/hashtag.html', {'form': form, 'error_message': error_message})
+            else:
+                hashtag.name = form.cleaned_data['name']
+                hashtag.save()
+                return redirect('home')
+    else:
+        form = HashtagForm(instance=hashtag)
+        return render(request, 'theme/hashtag.html', {'form': form})
+
+
+def search(request, hashtag_id):
+    hashtag = get_object_or_404(Hashtag, pk=hashtag_id)
+    return render(request, 'theme/search.html', {'hashtag': hashtag})

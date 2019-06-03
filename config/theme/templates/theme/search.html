@@ -11,8 +11,8 @@
 			<div class="container">
 				<div class="col-md-12 col-md-offset-0">
 					<div class="animate-box">
-						<h2>Blog</h2>
-						<p class="breadcrumbs"><span><a href="index.html">Home</a></span> <span>Blog</span></p>
+						<h2>{{ hashtag }}이(가) 있는 게시글 </h2>
+						<p class="breadcrumbs"><span><a href="index.html">Home</a></span> <span>{{ hashtag }} 검색 결과</span></p>
 					</div>
 				</div>
 			</div>
@@ -23,29 +23,15 @@
 <div class="colorlib-blog">
 	<div class="container">
 		<div class="row">
-			<div class="dropdown">
-				<button class="btn btn-primary dropdown-toggle float-left" type="button" id="dropdownMenuButton"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Hashtag 검색
-				</button>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					{% for hashtag in hashtags.all %}
-					<a class="dropdown-item" href="{% url 'search' hashtag.id %}">{{ hashtag.name }}</a>
-					{% endfor %}
-				</div>
-			</div>
-		</div>
-		<br>
-		<div class="row">
-			{% for blog in blogs.all %}
+			{% for blog in hashtag.blog_set.all %}
 			<div class="col-md-4 animate-box">
 				<article>
-					<img class="card-img-top" src="{{ blog.image.url }}" alt="Card image cap" style="width: 250px; height:250px;">
+                <img class="card-img-top" src="{{ blog.image.url }}" alt="Card image cap" style="width: 250px; height:250px;">
 					<h2><a href="{% url 'detail' pk=blog.pk %}">{{ blog.title }}</a></h2>
 					<p class="admin"><span>{{ blog.pub_date }}</span></p>
 					<p>{{ blog.body }}</p>
 					<p class="author-wrap"><a href="#" class="author-img"
-							style="background-image: url({% static 'images/user.png' %})"></a> <a href="#"
+							style="background-image: url({% static 'images/user.png' %});"></a> <a href="#"
 							class="author">by {{ blog.writer }}</a></p>
 				</article>
 			</div>
