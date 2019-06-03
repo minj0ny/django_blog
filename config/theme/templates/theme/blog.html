@@ -40,7 +40,9 @@
 			{% for blog in blogs.all %}
 			<div class="col-md-4 animate-box">
 				<article>
+					{% if blog.image %}
 					<img class="card-img-top" src="{{ blog.image.url }}" alt="Card image cap" style="width: 250px; height:250px;">
+					{% endif %}
 					<h2><a href="{% url 'detail' pk=blog.pk %}">{{ blog.title }}</a></h2>
 					<p class="admin"><span>{{ blog.pub_date }}</span></p>
 					<p>{{ blog.body }}</p>
